@@ -2,10 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {ApiService} from '../api-service';
 import {CommonModule} from '@angular/common';
 import {Router, RouterModule} from '@angular/router';
+import {Header} from '../header/header';
 
 @Component({
   selector: 'app-index',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, Header],
   templateUrl: './index.html',
   styleUrl: './index.css'
 })
