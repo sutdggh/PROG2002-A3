@@ -23,7 +23,7 @@
         <p><strong>Organization:</strong> {{e.organization}}</p>
         <p><strong>Date:</strong> {{e.start_datetime | date}}</p>
         <p>{{e.purpose}}</p>
-        <button onclick="location.href='event.html?id=${ev.id}'">View Details</button>
+        <button (click)="goEvent(e)">View Details</button>
       </div>
     </div>
   </div>

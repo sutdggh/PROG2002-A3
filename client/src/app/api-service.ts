@@ -21,4 +21,8 @@ export class ApiService {
   fetchSearchEvents(params: any): Observable<any> {
     return this.http.get('http://localhost:3000/api/events/search', { params })
   }
+
+  fetchEventDetail(id: string): Observable<any> {
+    return this.http.get('http://localhost:3000/api/events/' + id)
+  }
 }

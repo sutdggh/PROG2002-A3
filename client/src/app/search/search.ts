@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ApiService} from '../api-service';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {RouterModule} from '@angular/router';
+import {Router, RouterModule} from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -20,7 +20,10 @@ export class Search implements OnInit {
   events: any[] = []
 
 
-  constructor(private apiService: ApiService) {
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+  ) {
   }
 
   ngOnInit(): void {
@@ -49,5 +52,9 @@ export class Search implements OnInit {
 
   isPast(event: any): boolean {
     return event.end_datetime && new Date(event.end_datetime) < new Date()
+  }
+
+  goEvent(event: any): void {
+    this.router.navigate(['/event', event.id])
   }
 }

@@ -1,0 +1,30 @@
+<header>
+  <h1>Event Details</h1>
+</header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="search.html">Search Events</a>
+</nav>
+
+<div class="container">
+  <div *ngIf="event" id="event-details">
+    <img [src]="event.image_url" [alt]="event.name" />
+    <h2> {{event.name}}</h2>
+    <p><strong>Category:</strong> {{event.category}}</p>
+    <p><strong>Organization:</strong> {{event.organization}}</p>
+    <p><strong>Mission:</strong> {{event.mission}}</p>
+    <p><strong>Contact:</strong> {{event.contact_email}} | {{event.phone}}</p>
+    <p><strong>Date:</strong> {{event.start_datetime | date }} - {{event.end_datetime | date}}</p>
+    <p><strong>Venue:</strong> {{event.venue_name}}, {{event.address}}, {{event.city}}, {{event.state}}</p>
+    <p>{{event.description}}</p>
+    <p><strong>Ticket Price:</strong> ${{(event.ticket_price_cents/100).toFixed(2)}}</p>
+    <p><strong>Goal vs Raised:</strong></p>
+    <div class="progress-bar">
+      <div class="progress-fill" style="width:{{event.raised_amount_cents/event.goal_amount_cents*100}}%">
+        ${{(event.raised_amount_cents/100).toFixed(2)}} / ${{(event.goal_amount_cents/100).toFixed(2)}}
+      </div>
+    </div>
+    <button style="margin-top: 20px;" onclick="alert('This feature is currently under construction')">Register</button>
+  </div>
+</div>

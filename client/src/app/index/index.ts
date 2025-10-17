@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from '../api-service';
 import {CommonModule} from '@angular/common';
-import {RouterModule} from '@angular/router';
+import {Router, RouterModule} from '@angular/router';
 
 @Component({
   selector: 'app-index',
@@ -12,7 +12,10 @@ import {RouterModule} from '@angular/router';
 export class Index implements OnInit {
   events: any[] = []
 
-  constructor(private apiService: ApiService) {
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+  ) {
   }
 
   ngOnInit(): void {
@@ -23,5 +26,9 @@ export class Index implements OnInit {
 
   isPast(event: any): boolean {
     return event.end_datetime && new Date(event.end_datetime) < new Date()
+  }
+
+  goEvent(event: any): void {
+    this.router.navigate(['/event', event.id])
   }
 }
