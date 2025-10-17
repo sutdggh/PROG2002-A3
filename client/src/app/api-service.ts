@@ -13,4 +13,12 @@ export class ApiService {
   fetchHomeEvents(): Observable<any> {
     return this.http.get('http://localhost:3000/api/events/home')
   }
+
+  fetchCategories(): Observable<any> {
+    return this.http.get('http://localhost:3000/api/categories')
+  }
+
+  fetchSearchEvents(params: any): Observable<any> {
+    return this.http.get('http://localhost:3000/api/events/search', { params })
+  }
 }

@@ -1,6 +1,5 @@
 <header>
-  <h1>Heart for Change</h1>
-  <p>Connecting communities through charity events</p>
+  <h1>Search Charity Events</h1>
 </header>
 
 <nav>
@@ -9,8 +8,24 @@
 </nav>
 
 <div class="container">
-  <h2>Events</h2>
-  <div id="events">
+  <form id="search-form" (ngSubmit)="search()">
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date" [(ngModel)]="date">
+
+    <label for="location">City or State:</label>
+    <input type="text" id="location" placeholder="Enter city or state" name="location" [(ngModel)]="location">
+
+    <label for="category">Category:</label>
+    <select id="category" name="category" [(ngModel)]="category_id">
+      <option value="">All Categories</option>
+      <option *ngFor="let c of categories" [value]="c.id">{{c.name}}</option>
+    </select>
+
+    <button type="submit">Search</button>
+    <button type="button" (click)="clear()">Clear Filters</button>
+  </form>
+
+  <div id="results">
     <div class="card" *ngFor="let e of events">
       <img [src]="e.image_url" [alt]="e.name" />
       <div class="card-body">
