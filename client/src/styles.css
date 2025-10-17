@@ -123,6 +123,20 @@ form button {
   font-weight: bold;
 }
 
+.events-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin: 0 auto;
+}
+
+.message {
+  background-color: #ffa099;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
 /* responsive */
 @media (max-width: 768px) {
   .container {

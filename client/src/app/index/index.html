@@ -2,7 +2,7 @@
 
 <div class="container">
   <h2>Events</h2>
-  <div id="events">
+  <div id="events" class="events-list">
     <div class="card" *ngFor="let e of events">
       <img [src]="e.image_url" [alt]="e.name" />
       <div class="card-body">
@@ -19,4 +19,5 @@
       </div>
     </div>
   </div>
+  <div *ngIf="message" class="message">{{message}}</div>
 </div>

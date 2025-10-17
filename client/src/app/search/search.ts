@@ -19,6 +19,7 @@ export class Search implements OnInit {
   category_id = ''
 
   events: any[] = []
+  message = ""
 
 
   constructor(
@@ -27,23 +28,31 @@ export class Search implements OnInit {
   ) {
   }
 
+  // fetch categories when page load
   ngOnInit(): void {
     this.apiService.fetchCategories().subscribe(data => {
       this.categories = data
+    }, () => {
+      this.message = "Failed to load categories."
     })
   }
 
   search() {
+    // create search parameters
     const params = {
       date: this.date,
       location: this.location,
       category_id: this.category_id
     }
+    // search events
     this.apiService.fetchSearchEvents(params).subscribe(data => {
       this.events = data
+    }, () => {
+      this.message = "Failed to load events."
     })
   }
 
+  // clear search input value and event list
   clear() {
     this.date = ''
     this.location = ''
@@ -51,10 +60,12 @@ export class Search implements OnInit {
     this.events = []
   }
 
+  // Determine whether the current event has ended
   isPast(event: any): boolean {
     return event.end_datetime && new Date(event.end_datetime) < new Date()
   }
 
+  // go to event detail page
   goEvent(event: any): void {
     this.router.navigate(['/event', event.id])
   }

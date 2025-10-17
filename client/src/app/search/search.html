@@ -18,7 +18,7 @@
     <button type="button" (click)="clear()">Clear Filters</button>
   </form>
 
-  <div id="results">
+  <div id="results" class="events-list">
     <div class="card" *ngFor="let e of events">
       <img [src]="e.image_url" [alt]="e.name" />
       <div class="card-body">
@@ -35,4 +35,6 @@
       </div>
     </div>
   </div>
+
+  <div *ngIf="message" class="message">{{message}}</div>
 </div>

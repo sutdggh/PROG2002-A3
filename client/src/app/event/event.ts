@@ -13,17 +13,22 @@ import {Header} from '../header/header';
 export class Event implements OnInit {
   id: string = ""
   event: any
+  message = ""
 
   constructor(
     private apiService: ApiService,
     private route: ActivatedRoute
   ) {
+    // get dynamic route id
     this.id = this.route.snapshot.params['id']
   }
 
+  // fetch event by id when page load
   ngOnInit(): void {
     this.apiService.fetchEventDetail(this.id).subscribe(data => {
       this.event = data
+    }, () => {
+      this.message = "Failed to load event."
     })
   }
 
