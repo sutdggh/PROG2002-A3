@@ -1,8 +1,10 @@
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 const { getConnection } = require('./event_db');
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 // Import routes

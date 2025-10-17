@@ -1,0 +1,30 @@
+<header>
+  <h1>Heart for Change</h1>
+  <p>Connecting communities through charity events</p>
+</header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="search.html">Search Events</a>
+</nav>
+
+<div class="container">
+  <h2>Events</h2>
+  <div id="events">
+    <div class="card" *ngFor="let e of events">
+      <img [src]="e.image_url" [alt]="e.name" />
+      <div class="card-body">
+        <h3>
+          {{e.name}}
+          <span *ngIf="isPast(e)" style="color:red; font-size:0.9rem;">(Past)</span>
+          <span *ngIf="!isPast(e)" style="color:green; font-size:0.9rem;">(Upcoming)</span>
+        </h3>
+        <p><strong>Category:</strong> {{e.category}}</p>
+        <p><strong>Organization:</strong> {{e.organization}}</p>
+        <p><strong>Date:</strong> {{e.start_datetime | date}}</p>
+        <p>{{e.purpose}}</p>
+        <button onclick="location.href='event.html?id=${ev.id}'">View Details</button>
+      </div>
+    </div>
+  </div>
+</div>
