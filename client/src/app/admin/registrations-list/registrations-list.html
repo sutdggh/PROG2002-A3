@@ -1,1 +1,28 @@
-<p>registrations-list works!</p>
+<h2>Registration List</h2>
+
+<table>
+  <thead>
+  <tr>
+    <th>Event</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Phone</th>
+    <th>Tickets</th>
+    <th>Notes</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let registration of registrations">
+    <td>{{ registration.event_name }}</td>
+    <td>{{ registration.registrant_name }}</td>
+    <td>{{ registration.contact_email }}</td>
+    <td>{{ registration.contact_phone }}</td>
+    <td>{{ registration.tickets }}</td>
+    <td>{{ registration.notes }}</td>
+    <td>
+      <button class="danger" style="margin-left: 10px;" (click)="deleteRegistration(registration.id)">Delete</button>
+    </td>
+  </tr>
+  </tbody>
+</table>

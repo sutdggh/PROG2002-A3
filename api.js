@@ -11,11 +11,13 @@ app.use(express.json());
 const eventsRouter = require('./routes/events');
 const categoriesRouter = require('./routes/categories');
 const organizationsRouter = require('./routes/organizations');
+const registrationsRouter = require('./routes/registrations');
 
 // Use routes
 app.use('/api/events', eventsRouter);
 app.use('/api/categories', categoriesRouter);
 app.use('/api/organizations', organizationsRouter);
+app.use('/api/registrations', registrationsRouter);
 
 // Use client
 app.use(express.static(path.join(__dirname, 'client')));

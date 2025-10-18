@@ -46,6 +46,8 @@ export class EventsList {
     }
     this.apiService.deleteEvent(id).subscribe(() => {
       this.getAllEvents()
+    }, (err: any) => {
+      alert(err?.error?.error || "Delete Error.")
     });
   }
 

@@ -51,7 +51,15 @@ export class ApiService {
     return this.http.get(`http://localhost:3000/api/events/${id}/registrations`);
   }
 
+  fetchAllRegistrations(): Observable<any> {
+    return this.http.get(`http://localhost:3000/api/registrations`);
+  }
+
   addEventRegistration(id: string, formData: any) {
     return this.http.post(`http://localhost:3000/api/events/${id}/registrations`, formData);
+  }
+
+  deleteRegistration(id: number): Observable<any> {
+    return this.http.delete('http://localhost:3000/api/registrations/' + id)
   }
 }
