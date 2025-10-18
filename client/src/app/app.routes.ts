@@ -3,6 +3,7 @@ import { Index } from './index';
 import { Search } from './search/search';
 import { Event } from './event/event';
 import { Register } from './register/register';
+import {Admin} from './admin/admin';
 
 export const routes: Routes = [
   {
@@ -20,5 +21,9 @@ export const routes: Routes = [
   {
     path: 'register/:id',
     component: Register
+  },
+  {
+    path: 'admin',
+    component: Admin
   }
 ];

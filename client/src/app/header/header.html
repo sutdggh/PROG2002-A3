@@ -1,8 +1,9 @@
 <nav>
   <a routerLink="/">Home</a>
   <a routerLink="/search">Search Events</a>
+  <a routerLink="/admin">Admin</a>
 </nav>
-<header>
+<header *ngIf="!hideHeader">
   <div class="bg"></div>
   <div class="bg bg2"></div>
   <div class="bg bg3"></div>

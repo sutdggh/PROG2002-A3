@@ -1,0 +1,25 @@
+.admin-container {
+  display: flex;
+  height: calc(100vh - 44px);
+}
+
+.container {
+  flex: 1;
+}
+
+.admin-nav {
+  flex-direction: column;
+  width: 230px;
+  justify-content: flex-start;
+  padding: 20px 10px;
+  gap: 20px;
+  border-top: 1px solid #42566b;
+}
+
+.admin-nav button {
+  padding: 0.8rem 1.2rem
+}
+
+.container {
+  margin: 1rem;
+}
