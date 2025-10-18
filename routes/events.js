@@ -79,5 +79,21 @@ router.get('/:id', (req, res) => {
   });
 });
 
+// get registrations for event
+router.get('/:id/registrations', (req, res) => {
+  const sql = `
+    SELECT id, event_id, registrant_name, contact_email, contact_phone, tickets, notes, created_at
+    FROM event_registrations
+    WHERE event_id = ?
+    ORDER BY created_at DESC
+  `;
+  getConnection().query(sql, [req.params.id], (err, results) => {
+    if (err) {
+      return res.status(500).json({ error: err.message });
+    }
+    res.json(results);
+  });
+});
+
 
 module.exports = router;

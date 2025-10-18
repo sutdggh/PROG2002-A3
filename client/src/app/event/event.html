@@ -21,5 +21,29 @@
     <button style="margin-top: 20px;" onclick="alert('This feature is currently under construction')">Register</button>
   </div>
 
+  <div *ngIf="registrations && registrations.length > 0" class="registrations">
+    <h3 style="margin-top: 40px;">Registered Participants</h3>
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Tickets</th>
+        <th>Notes</th>
+        <th>Registered At</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let r of registrations">
+        <td>{{ r.registrant_name }}</td>
+        <td>{{ r.contact_email }}</td>
+        <td>{{ r.tickets }}</td>
+        <td>{{ r.notes || '-' }}</td>
+        <td>{{ r.created_at | date:'short' }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
   <div *ngIf="message" class="message">{{message}}</div>
 </div>

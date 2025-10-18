@@ -13,6 +13,7 @@ import {Header} from '../header/header';
 export class Event implements OnInit {
   id: string = ""
   event: any
+  registrations: any[] = [];
   message = ""
 
   constructor(
@@ -30,6 +31,12 @@ export class Event implements OnInit {
     }, () => {
       this.message = "Failed to load event."
     })
+
+    this.apiService.fetchEventRegistrations(this.id).subscribe(data => {
+      this.registrations = data;
+    }, () => {
+      this.message = 'Failed to load registrations.';
+    });
   }
 
 }

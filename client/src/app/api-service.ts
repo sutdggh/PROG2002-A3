@@ -25,4 +25,8 @@ export class ApiService {
   fetchEventDetail(id: string): Observable<any> {
     return this.http.get('http://localhost:3000/api/events/' + id)
   }
+
+  fetchEventRegistrations(id: string): Observable<any> {
+    return this.http.get(`http://localhost:3000/api/events/${id}/registrations`);
+  }
 }
