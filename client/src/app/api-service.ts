@@ -62,4 +62,8 @@ export class ApiService {
   deleteRegistration(id: number): Observable<any> {
     return this.http.delete('http://localhost:3000/api/registrations/' + id)
   }
+
+  getWeather(lat: string, lng: string): Observable<any> {
+    return this.http.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Australia%2FSydney`);
+  }
 }

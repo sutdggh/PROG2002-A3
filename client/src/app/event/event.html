@@ -45,5 +45,28 @@
     </table>
   </div>
 
+  <div *ngIf="weather?.daily" class="weather-table">
+    <h3 style="margin-top: 40px;">7-Day Weather Forecast</h3>
+    <table>
+      <thead>
+      <tr>
+        <th>Date</th>
+        <th>Weather</th>
+        <th>Max Temp (°C)</th>
+        <th>Min Temp (°C)</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let day of weather.daily.time; let i = index">
+        <td>{{ day }}</td>
+        <td>{{ weatherCodeMap[weather.daily.weather_code[i]] || weather.daily.weather_code[i] }}</td>
+        <td>{{ weather.daily.temperature_2m_max[i] }}</td>
+        <td>{{ weather.daily.temperature_2m_min[i] }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+
   <div *ngIf="message" class="message">{{message}}</div>
 </div>

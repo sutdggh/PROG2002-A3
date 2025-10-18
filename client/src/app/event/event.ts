@@ -15,6 +15,7 @@ export class Event implements OnInit {
   event: any
   registrations: any[] = [];
   message = ""
+  weather: any
 
   constructor(
     private apiService: ApiService,
@@ -29,6 +30,13 @@ export class Event implements OnInit {
   ngOnInit(): void {
     this.apiService.fetchEventDetail(this.id).subscribe(data => {
       this.event = data
+
+      // get latitude/longitude and get weather data
+      const lat = data.latitude
+      const long = data.longitude
+      this.apiService.getWeather(lat, long).subscribe(data1 => {
+        this.weather = data1
+      })
     }, () => {
       this.message = "Failed to load event."
     })
@@ -40,4 +48,13 @@ export class Event implements OnInit {
     });
   }
 
+  weatherCodeMap: any = {
+    0: 'Clear',
+    1: 'Mostly Clear',
+    2: 'Partly Cloudy',
+    3: 'Overcast',
+    51: 'Light Rain',
+    53: 'Moderate Rain',
+    81: 'Showers'
+  };
 }

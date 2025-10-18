@@ -16,7 +16,7 @@
   </thead>
   <tbody>
   <tr *ngFor="let e of events">
-    <td>{{ e.name }}</td>
+    <td><a [routerLink]="'/event/' + e.id">{{ e.name }}</a></td>
     <td>{{ e.category }}</td>
     <td>{{ e.organization }}</td>
     <td>{{ e.city }}</td>

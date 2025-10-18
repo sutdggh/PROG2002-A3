@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import {ApiService} from '../../api-service';
 import {CommonModule} from '@angular/common';
 import {AddEvent} from '../add-event/add-event';
+import {RouterModule} from '@angular/router';
 
 @Component({
   selector: 'app-events-list',
-  imports: [CommonModule, AddEvent],
+  imports: [CommonModule, AddEvent, RouterModule],
   templateUrl: './events-list.html',
   styleUrl: './events-list.css'
 })
