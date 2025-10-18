@@ -143,6 +143,89 @@ router.post('/:id/registrations', (req, res) => {
   });
 });
 
+// add event
+router.post('/events', (req, res) => {
+  const b = req.body || {};
+  const errors = [];
 
+  // required fields
+  if (!b.org_id) {
+    errors.push('org_id is required.');
+  }
+  if (!b.category_id) {
+    errors.push('category_id is required.');
+  }
+  if (!b.name) {
+    errors.push('name is required.');
+  }
+  if (!b.start_datetime) {
+    errors.push('start_datetime is required.');
+  }
+
+  // control input length
+  if (b.name && String(b.name).length > 200) {
+    errors.push('name too long (<=200).');
+  }
+  if (b.purpose && String(b.purpose).length > 255) {
+    errors.push('purpose too long (<=255).');
+  }
+  if (b.image_url && String(b.image_url).length > 400) {
+    errors.push('image_url too long (<=400).');
+  }
+
+  // number type should positive
+  if (b.ticket_price_cents !== undefined && Number(b.ticket_price_cents) < 0) {
+    errors.push('ticket_price_cents >= 0.');
+  }
+  if (b.capacity !== undefined && b.capacity !== null && Number(b.capacity) < 0) {
+    errors.push('capacity >= 0 or null.');
+  }
+  if (b.goal_amount_cents !== undefined && b.goal_amount_cents !== null && Number(b.goal_amount_cents) < 0) {
+    errors.push('goal_amount_cents >= 0 or null.');
+  }
+
+  // Latitude and Longitude Limit Range
+  if (b.latitude !== undefined && b.latitude !== null) {
+    const lat = Number(b.latitude);
+    if (isNaN(lat) || lat < -90 || lat > 90) errors.push('latitude must be between -90 and 90.');
+  }
+  if (b.longitude !== undefined && b.longitude !== null) {
+    const lng = Number(b.longitude);
+    if (isNaN(lng) || lng < -180 || lng > 180) errors.push('longitude must be between -180 and 180.');
+  }
+
+  // Time sequence (end can be empty, but cannot be earlier than start)
+  const start = b.start_datetime ? new Date(b.start_datetime) : null;
+  const end = b.end_datetime ? new Date(b.end_datetime) : null;
+  if (start && end && end < start) {
+    errors.push('end_datetime must be >= start_datetime.');
+  }
+
+  // status default active
+  const status = 'active';
+
+  if (errors.length) {
+    return res.status(400).json({ errors });
+  }
+
+  const sql = `
+    INSERT INTO events (
+      org_id, category_id, name, purpose, description, start_datetime, end_datetime, venue_name, address, city, state, 
+      postcode, latitude, longitude, image_url, featured, ticket_price_cents, capacity, goal_amount_cents, status
+    ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+  `;
+  const params = [
+    b.org_id, b.category_id, b.name, b.purpose, b.description, b.start_datetime, b.end_datetime,
+    b.venue_name, b.address, b.city, b.state, b.postcode, b.latitude, b.longitude, b.image_url, b.featured ? 1 : 0,
+    b.ticket_price_cents || 0, b.capacity, b.goal_amount_cents, status
+  ];
+
+  getConnection().query(sql, params, (err, result) => {
+    if (err) {
+      return res.status(500).json({ error: err.message });
+    }
+    res.status(201).json({ id: result.insertId, message: 'Event created.' });
+  });
+});
 
 module.exports = router;
