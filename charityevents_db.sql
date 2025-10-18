@@ -117,3 +117,41 @@ INSERT INTO events
    '2025-11-03 19:00:00', '2025-11-03 20:00:00',
    'Lock 3 Shelter', '210 Canal St', 'Scranton', 'PA', '18503', 41.408000, -75.662000, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXI_WYMQWPBg7L1TAANiKK6X1txJzXwVnTAA&s', 0,
    600, 40, 0, 2000, 0, 'suspended', NOW(), NOW());
+
+CREATE TABLE event_registrations (
+  id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  event_id BIGINT UNSIGNED NOT NULL,
+  registrant_name VARCHAR(120) NOT NULL,
+  contact_email VARCHAR(255) NOT NULL,
+  contact_phone VARCHAR(50),
+  tickets INT UNSIGNED NOT NULL,
+  notes VARCHAR(255),
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+  CONSTRAINT fk_reg_event FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT uq_event_email UNIQUE (event_id, contact_email),
+  CONSTRAINT chk_tickets_positive CHECK (tickets > 0)
+);
+
+INSERT INTO event_registrations
+(event_id,registrant_name,contact_email,contact_phone,tickets,notes,created_at,updated_at)
+VALUES
+(7, 'Ava Kim', 'ava.kim@gmail.com', '+1-208-555-0111', 2, 'first 2K ever', '2025-10-16 13:20:00', '2025-10-16 13:20:00'),
+(4, 'Jon Cruz', 'jon.cruz@yahoo.com', '+1-317-555-0102', 1, 'front row if possible', '2025-10-10 18:05:00', '2025-10-10 18:05:00'),
+(3, 'Mila Rao', 'mila.rao@outlook.com', '+1-319-555-0144', 3, 'bringing reusable containers', '2025-10-13 20:10:00', '2025-10-13 20:10:00'),
+(8, 'Chen Li', 'chen.li+auction@gmail.com', '+1-515-555-0177', 2, 'pay at door', '2025-10-18 08:45:00', '2025-10-18 08:45:00'),
+(9, 'Sara Lee', 'sara.lee@gmail.com', '+1-419-555-0188', 2, 'mother & daughter', '2025-10-02 19:22:00', '2025-10-02 19:22:00'),
+(10, 'Noah Fox', 'noah.fox@icloud.com', '+1-707-555-0133', 1, 'bringing a camp chair', '2025-10-20 09:40:00', '2025-10-20 09:40:00'),
+(11, 'Ian Park', 'ian.park@gmail.com', '+1-509-555-0166', 2, 'vegetarian soup please', '2025-10-24 12:00:00', '2025-10-24 12:00:00'),
+(12, 'Zoe Tan', 'zoe.tan@proton.me', '+1-570-555-0120', 1, 'jogging with neighbors', '2025-10-26 15:30:00', '2025-10-26 15:30:00'),
+(5, 'Emma Wu', 'emma.wu@gmail.com', '+1-315-555-0158', 2, 'new foster, has questions', '2025-10-06 21:55:00', '2025-10-06 21:55:00'),
+(1, 'Ray Diaz', 'ray.diaz@gmail.com', '+1-541-555-0134', 1, 'will bring extra gloves', '2025-10-09 19:10:00', '2025-10-09 19:10:00'),
+(3, 'Omar Ali', 'omar.ali@fastmail.com', '+1-319-555-0199', 1, 'allergic to peanuts', '2025-10-14 03:05:00', '2025-10-14 03:05:00'),
+(2, 'Lina Patel', 'lina.patel@gmail.com', '+1-218-555-0123', 2, 'needs low table', '2025-10-07 05:40:00', '2025-10-07 05:40:00'),
+(4, 'Marco Silva', 'marco.silva@hotmail.com', '+1-317-555-0175', 2, 'arriving early to help set up', '2025-10-11 08:55:00', '2025-10-11 08:55:00'),
+(7, 'Priya Shah', 'priya.shah@gmail.com', '+1-208-555-0191', 1, 'walker, no chip', '2025-10-17 20:10:00', '2025-10-17 20:10:00'),
+(10, 'Lucas Meyer', 'lucas.meyer@gmail.com', '+1-707-555-0142', 3, 'family of three', '2025-10-22 10:05:00', '2025-10-22 10:05:00'),
+(8, 'Hannah Cho', 'hannah.cho@outlook.com', '+1-515-555-0108', 1, 'bidding on coffee basket', '2025-10-19 14:18:00', '2025-10-19 14:18:00'),
+(9, 'Miguel Santos', 'miguel.santos@gmail.com', '(419)555-2280', 1, 'first watercolor class', '2025-10-03 11:12:00', '2025-10-03 11:12:00'),
+(11, 'Grace Lin', 'grace.lin@yahoo.com', '+1-509-555-0205', 4, 'bringing cookies to share', '2025-10-27 18:44:00', '2025-10-27 18:44:00');
