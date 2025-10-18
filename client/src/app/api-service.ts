@@ -18,6 +18,14 @@ export class ApiService {
     return this.http.get('http://localhost:3000/api/events')
   }
 
+  addEvent(formData: any) {
+    return this.http.post('http://localhost:3000/api/events', formData);
+  }
+
+  updateEvent(id: string, formData: any) {
+    return this.http.put('http://localhost:3000/api/events/' + id, formData);
+  }
+
   deleteEvent(id: number): Observable<any> {
     return this.http.delete('http://localhost:3000/api/events/' + id)
   }
@@ -25,6 +33,11 @@ export class ApiService {
   fetchCategories(): Observable<any> {
     return this.http.get('http://localhost:3000/api/categories')
   }
+
+  fetchOrganizations(): Observable<any> {
+    return this.http.get('http://localhost:3000/api/organizations')
+  }
+
 
   fetchSearchEvents(params: any): Observable<any> {
     return this.http.get('http://localhost:3000/api/events/search', { params })

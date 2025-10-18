@@ -125,6 +125,7 @@ input, select, textarea {
   width: 100%;
   border: 1px solid #ccc;
   border-radius: 6px;
+  box-sizing: border-box;
 }
 
 form button {
@@ -162,6 +163,29 @@ form button {
   border-radius: 5px;
   text-align: center;
   margin-top: 20px;
+}
+
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+}
+
+.required-symbol {
+  color: red;
+  font-weight: 700;
 }
 
 /* responsive */

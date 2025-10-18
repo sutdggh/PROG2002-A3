@@ -1,0 +1,137 @@
+<div class="modal">
+  <div class="modal-content" [style.width]="width + 'px'">
+    <h3>{{ eventData ? 'Edit Event' : 'Add Event' }}</h3>
+
+    <form (ngSubmit)="save()">
+      <div>
+        <label>Organization (<span class="required-symbol">*</span>):</label>
+        <select [(ngModel)]="form.org_id" name="org_id">
+          <option *ngFor="let organization of organizations" [value]="organization.id">{{organization.name}}</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Category (<span class="required-symbol">*</span>):</label>
+        <select [(ngModel)]="form.category_id" name="category_id">
+          <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Name (<span class="required-symbol">*</span>):</label>
+        <input [(ngModel)]="form.name" name="name" required>
+      </div>
+
+      <div>
+        <label>Start Date (<span class="required-symbol">*</span>):</label>
+        <input type="datetime-local" [(ngModel)]="form.start_datetime" name="start_datetime" required>
+      </div>
+
+      <div>
+        <label>End Date:</label>
+        <input type="datetime-local" [(ngModel)]="form.end_datetime" name="end_datetime">
+      </div>
+
+      <div>
+        <label>Purpose:</label>
+        <input [(ngModel)]="form.purpose" name="purpose">
+      </div>
+
+      <div>
+        <label>Description:</label>
+        <input [(ngModel)]="form.description" name="description">
+      </div>
+
+      <div>
+        <label>Venue Name:</label>
+        <input [(ngModel)]="form.venue_name" name="venue_name">
+      </div>
+
+      <div>
+        <label>Address:</label>
+        <input [(ngModel)]="form.address" name="address">
+      </div>
+
+      <div>
+        <label>City:</label>
+        <input [(ngModel)]="form.city" name="city">
+      </div>
+
+      <div>
+        <label>State:</label>
+        <input [(ngModel)]="form.state" name="state">
+      </div>
+
+      <div>
+        <label>Postcode:</label>
+        <input [(ngModel)]="form.postcode" name="postcode">
+      </div>
+
+      <div>
+        <label>Latitude:</label>
+        <input [(ngModel)]="form.latitude" name="latitude">
+      </div>
+
+      <div>
+        <label>Longitude:</label>
+        <input [(ngModel)]="form.longitude" name="longitude">
+      </div>
+
+      <div>
+        <label>Image Url:</label>
+        <input [(ngModel)]="form.image_url" name="image_url">
+      </div>
+
+      <div>
+        <label>Featured:</label>
+        <select [(ngModel)]="form.featured" name="featured">
+          <option [value]="0">No</option>
+          <option [value]="1">Yes</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Ticket Price Cents:</label>
+        <input [(ngModel)]="form.ticket_price_cents" name="ticket_price_cents">
+      </div>
+
+      <div>
+        <label>Capacity:</label>
+        <input [(ngModel)]="form.capacity" name="capacity">
+      </div>
+
+      <div>
+        <label>Sold:</label>
+        <input [(ngModel)]="form.sold" name="sold">
+      </div>
+
+      <div>
+        <label>Goal Amount Cents:</label>
+        <input [(ngModel)]="form.goal_amount_cents" name="goal_amount_cents">
+      </div>
+
+      <div>
+        <label>Raised Amount Cents:</label>
+        <input [(ngModel)]="form.raised_amount_cents" name="raised_amount_cents">
+      </div>
+
+      <div>
+        <label>Status:</label>
+        <select [(ngModel)]="form.status" name="status">
+          <option value="active">Active</option>
+          <option value="suspended">Suspended</option>
+        </select>
+      </div>
+
+      <div></div>
+      <div></div>
+
+      <div class="buttons">
+        <button type="submit">{{ eventData ? 'Update' : 'Create' }}</button>
+        <button type="button" style="margin-left: 10px;" class="secondary" (click)="closeModal()">Cancel</button>
+      </div>
+    </form>
+
+    <div *ngIf="message" class="message">{{message}}</div>
+  </div>
+</div>

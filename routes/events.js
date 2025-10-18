@@ -23,7 +23,7 @@ router.get('/home', (req, res) => {
 // get all events
 router.get('/', (req, res) => {
   const sql = `
-    SELECT e.id, e.name, e.purpose, e.start_datetime, e.end_datetime, e.city, e.state, e.image_url, e.status, c.name AS category, o.name AS organization
+    SELECT e.*, c.name AS category, o.name AS organization
     FROM events e
     JOIN event_categories c ON e.category_id = c.id
     JOIN organizations o ON e.org_id = o.id
@@ -161,7 +161,7 @@ router.post('/:id/registrations', (req, res) => {
 });
 
 // add event
-router.post('/events', (req, res) => {
+router.post('/', (req, res) => {
   const b = req.body || {};
   const errors = [];
 
@@ -219,7 +219,7 @@ router.post('/events', (req, res) => {
   }
 
   // status default active
-  const status = 'active';
+  const status = b.status || 'active';
 
   if (errors.length) {
     return res.status(400).json({ errors });
@@ -246,7 +246,7 @@ router.post('/events', (req, res) => {
 });
 
 // update event
-router.put('/events/:id', (req, res) => {
+router.put('/:id', (req, res) => {
   const id = req.params.id;
   const b = req.body || {};
   const errors = [];
@@ -305,8 +305,7 @@ router.put('/events/:id', (req, res) => {
   }
 
   // status default active
-  const status = 'active';
-
+  const status = b.status || 'active';
 
   if (errors.length) {
     return res.status(400).json({ errors });
@@ -333,7 +332,7 @@ router.put('/events/:id', (req, res) => {
 });
 
 // delete event
-router.delete('/events/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
   const id = req.params.id;
   const conn = getConnection();
 

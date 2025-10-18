@@ -1,6 +1,6 @@
 .admin-container {
   display: flex;
-  height: calc(100vh - 44px);
+  min-height: calc(100vh - 44px);
 }
 
 .container {
