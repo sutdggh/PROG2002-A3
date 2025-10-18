@@ -10,10 +10,12 @@ app.use(express.json());
 // Import routes
 const eventsRouter = require('./routes/events');
 const categoriesRouter = require('./routes/categories');
+const organizationsRouter = require('./routes/organizations');
 
 // Use routes
 app.use('/api/events', eventsRouter);
 app.use('/api/categories', categoriesRouter);
+app.use('/api/organizations', organizationsRouter);
 
 // Use client
 app.use(express.static(path.join(__dirname, 'client')));
