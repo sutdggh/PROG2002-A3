@@ -1,0 +1,46 @@
+<app-header></app-header>
+
+<div class="container">
+  <div *ngIf="event" id="event-details">
+    <h2> {{event.name}}</h2>
+    <p><strong>Category:</strong> {{event.category}}</p>
+    <p><strong>Organization:</strong> {{event.organization}}</p>
+    <p><strong>Mission:</strong> {{event.mission}}</p>
+    <p><strong>Contact:</strong> {{event.contact_email}} | {{event.phone}}</p>
+    <p><strong>Date:</strong> {{event.start_datetime | date }} - {{event.end_datetime | date}}</p>
+    <p><strong>Venue:</strong> {{event.venue_name}}, {{event.address}}, {{event.city}}, {{event.state}}</p>
+    <p>{{event.description}}</p>
+    <p><strong>Ticket Price:</strong> ${{(event.ticket_price_cents/100).toFixed(2)}}</p>
+    <p><strong>Goal vs Raised:</strong></p>
+    <div class="progress-bar">
+      <div class="progress-fill" style="width:{{event.raised_amount_cents/event.goal_amount_cents*100}}%">
+        ${{(event.raised_amount_cents/100).toFixed(2)}} / ${{(event.goal_amount_cents/100).toFixed(2)}}
+      </div>
+    </div>
+    <button style="margin-top: 20px;" (click)="router.navigate(['/event', event.id])">Go Back</button>
+  </div>
+
+  <h2>Event Registration</h2>
+
+  <form id="register-form" (ngSubmit)="submitRegistration()">
+    <label for="name">Full Name:</label>
+    <input id="name" name="name" type="text" [(ngModel)]="form.registrant_name" placeholder="Enter your full name" required>
+
+    <label for="email">Email:</label>
+    <input id="email" name="email" type="email" [(ngModel)]="form.contact_email" placeholder="you@example.com" required>
+
+    <label for="phone">Phone:</label>
+    <input id="phone" name="phone" type="text" [(ngModel)]="form.contact_phone" placeholder="+1 555-123-4567">
+
+    <label for="tickets">Tickets:</label>
+    <input id="tickets" name="tickets" type="number" [(ngModel)]="form.tickets" min="1" required>
+
+    <label for="notes">Notes:</label>
+    <textarea id="notes" name="notes" [(ngModel)]="form.notes" rows="3" placeholder="Optional message..."></textarea>
+
+    <button type="submit">Submit Registration</button>
+    <button type="button" class="secondary" style="margin-left: 10px;" (click)="clear()">Clear</button>
+  </form>
+
+  <div *ngIf="message" class="message">{{message}}</div>
+</div>

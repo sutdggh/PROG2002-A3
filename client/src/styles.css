@@ -119,7 +119,7 @@ button:hover {
 }
 
 /* form */
-input, select {
+input, select, textarea {
   padding: 0.5rem;
   margin: 0.3rem 0;
   width: 100%;
@@ -161,6 +161,7 @@ form button {
   padding: 10px 20px;
   border-radius: 5px;
   text-align: center;
+  margin-top: 20px;
 }
 
 /* responsive */

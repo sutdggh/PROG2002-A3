@@ -18,7 +18,7 @@
         ${{(event.raised_amount_cents/100).toFixed(2)}} / ${{(event.goal_amount_cents/100).toFixed(2)}}
       </div>
     </div>
-    <button style="margin-top: 20px;" onclick="alert('This feature is currently under construction')">Register</button>
+    <button style="margin-top: 20px;" (click)="router.navigate(['/register', event.id])">Register</button>
   </div>
 
   <div *ngIf="registrations && registrations.length > 0" class="registrations">

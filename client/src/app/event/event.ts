@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from '../api-service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import {Header} from '../header/header';
 
@@ -18,7 +18,8 @@ export class Event implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public router: Router
   ) {
     // get dynamic route id
     this.id = this.route.snapshot.params['id']

@@ -29,4 +29,8 @@ export class ApiService {
   fetchEventRegistrations(id: string): Observable<any> {
     return this.http.get(`http://localhost:3000/api/events/${id}/registrations`);
   }
+
+  addEventRegistration(id: string, formData: any) {
+    return this.http.post(`http://localhost:3000/api/events/${id}/registrations`, formData);
+  }
 }
