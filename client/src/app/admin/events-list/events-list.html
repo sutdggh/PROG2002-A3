@@ -1,1 +1,33 @@
-<p>events-list works!</p>
+<h2>Events List</h2>
+
+<button (click)="newEvent()" style="margin-bottom: 10px;">Add Event</button>
+
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Category</th>
+    <th>Organization</th>
+    <th>City</th>
+    <th>Date</th>
+    <th>Status</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let e of events">
+    <td>{{ e.name }}</td>
+    <td>{{ e.category }}</td>
+    <td>{{ e.organization }}</td>
+    <td>{{ e.city }}</td>
+    <td>{{ e.start_datetime | date }}</td>
+    <td>{{ e.status }}</td>
+    <td>
+      <button (click)="editEvent(e)">Edit</button>
+      <button class="danger" style="margin-left: 10px;" (click)="deleteEvent(e.id)">Delete</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<!--<app-add-event *ngIf="editing" [eventData]="selectedEvent" (close)="closeEditor($event)"></app-add-event>-->

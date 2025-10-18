@@ -5,6 +5,7 @@
 
 .container {
   flex: 1;
+  max-width: initial;
 }
 
 .admin-nav {

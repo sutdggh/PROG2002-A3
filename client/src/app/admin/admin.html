@@ -6,8 +6,6 @@
     <button [class.active]="tab === 'registrations'" (click)="tab='registrations'">Registrations</button>
   </nav>
   <div class="container">
-    <h2>Admin Management</h2>
-
     <div class="admin-content">
       <app-events-list *ngIf="tab === 'events'"></app-events-list>
       <app-registrations-list *ngIf="tab === 'registrations'"></app-registrations-list>

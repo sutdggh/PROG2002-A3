@@ -14,6 +14,14 @@ export class ApiService {
     return this.http.get('http://localhost:3000/api/events/home')
   }
 
+  fetchAllEvents(): Observable<any> {
+    return this.http.get('http://localhost:3000/api/events')
+  }
+
+  deleteEvent(id: number): Observable<any> {
+    return this.http.delete('http://localhost:3000/api/events/' + id)
+  }
+
   fetchCategories(): Observable<any> {
     return this.http.get('http://localhost:3000/api/categories')
   }

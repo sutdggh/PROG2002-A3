@@ -20,6 +20,23 @@ router.get('/home', (req, res) => {
   });
 });
 
+// get all events
+router.get('/', (req, res) => {
+  const sql = `
+    SELECT e.id, e.name, e.purpose, e.start_datetime, e.end_datetime, e.city, e.state, e.image_url, e.status, c.name AS category, o.name AS organization
+    FROM events e
+    JOIN event_categories c ON e.category_id = c.id
+    JOIN organizations o ON e.org_id = o.id
+    ORDER BY e.start_datetime ASC
+  `;
+  getConnection().query(sql, (err, results) => {
+    if (err) {
+      return res.status(500).json({ error: err.message });
+    }
+    res.json(results);
+  });
+});
+
 // search events
 router.get('/search', (req, res) => {
   // get query parameters
